@@ -4,7 +4,7 @@ import socket
 host = '127.0.0.1'
 port = 8080
 
-with socket.socket((socket.AF_INET, socket.SOCK_STREAM) as client_socket:)
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
     cliente.connect((host,port))
     
     print("Conexión exitosa")
@@ -14,7 +14,7 @@ with socket.socket((socket.AF_INET, socket.SOCK_STREAM) as client_socket:)
     
     
     #Aquí le pones lo que lleve del socket
-    data = socket.recv()
+    data = socket.recv(1024)
     print(f"Dice {data.decode('uft-8')}")
     
     print("Cerrando cliente")
