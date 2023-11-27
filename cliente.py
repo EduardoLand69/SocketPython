@@ -1,10 +1,10 @@
-import socket
+import socket as sk
 
 #Declaramos variables de conexion
 host = '127.0.0.1'
-port = 8080
+port = 3103
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
+with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
     cliente.connect((host,port))
     
     print("Conexión exitosa")
@@ -14,7 +14,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
     
     
     #Aquí le pones lo que lleve del socket
-    data = socket.recv(1024)
+    data = cliente.recv(1024)
     print(f"Dice {data.decode('uft-8')}")
     
     print("Cerrando cliente")
