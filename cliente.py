@@ -17,16 +17,24 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
     #enviar el mensaje al servidor
     cliente.sendall(respuesta_cliente.encode('utf-8'))
     
-    ####Enviar una respuesta al servidor de si o no
-    #El servidor esta pidiendo una ruta
+    ####Enviar una respuesta al servidor
+    #El servidor esta preguntando si se quiere crear el direcotorio o no
     msg_servidor = cliente.recv(1024)
     #capturar una respuesta
     respuesta_cliente = input(msg_servidor.decode('utf-8'))
     #enviar el mensaje al servidor
     cliente.sendall(respuesta_cliente.encode('utf-8'))
     
-    ####Enviar una respuesta al servidor para buscar el archivo
-    #El servidor esta pidiendo una ruta
+    ####Enviar una respuesta al servidor
+    #El servidor esta pidiendo una archivo
+    msg_servidor = cliente.recv(1024)
+    #capturar una respuesta
+    respuesta_cliente = input(msg_servidor.decode('utf-8'))
+    #enviar el mensaje al servidor
+    cliente.sendall(respuesta_cliente.encode('utf-8'))
+    
+    ####Enviar una respuesta al servidor
+    #El servidor esta preguntando si se quiere crear el archivo
     msg_servidor = cliente.recv(1024)
     #capturar una respuesta
     respuesta_cliente = input(msg_servidor.decode('utf-8'))
