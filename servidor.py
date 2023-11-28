@@ -9,8 +9,6 @@ PORT = 3103
 pedirRuta = "Ingresa un directorio para empezar a trabar: "
 pedirArchivo = "Ingresa el nombre del archivo con el que quieres trabajar: "
 
-
-
 with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
     s.bind((HOST,PORT)) #unir la direccion ip con el puerto
     s.listen() #aceptar a 10 clientes
@@ -31,7 +29,24 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
             lmcs.esVacio(recibirRuta.decode('utf-8'))
             #ahora que sabemos que cumple con la estructura de un directorio
             if lmcs.buscarDirectorio(recibirRuta.decode('utf-8')):
-                #se cierra la conexion
+                #acciones a realizar si el directorio existe
+                #si el directorio existe, pasar a pedir el archivo
+                cliente.sendall(pedirArchivo.encode('utf-8'))
+                #recibir el archivo
+                recibirArchivo = cliente.recv(1024)
+                #buscar el archivo
+                if lmcs.buscarArchivo(recibirRuta.decode('utf-8'), recibirArchivo.decode('utf-8')):
+                    #archivo encontrado
+                    print(f"El archivo se encuentra en el directorio {recibirRuta.decode('utf-8')}")
+                    
+                    #bloque de codigo para saber que hacer con el archivo
+                    
+                    pass
+                else:
+                    #archivo no encontrado
+                    print(f"El archivo no se encuentra en el directorio {recibirRuta.decode('utf-8')}")
+                    
+                    pass
                 pass
             else:
                 #print("Directorio no encontrado")
