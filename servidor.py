@@ -9,6 +9,8 @@ PORT = 3103
 pedirRuta = "Ingresa un directorio para empezar a trabar: "
 pedirArchivo = "Ingresa el nombre del archivo con el que quieres trabajar: "
 
+
+
 with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
     s.bind((HOST,PORT)) #unir la direccion ip con el puerto
     s.listen() #aceptar a 10 clientes
@@ -52,10 +54,31 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
                         #buscar el archivo
                         if lmcs.buscarArchivo(recibirRuta.decode('utf-8'), recibirArchivo.decode('utf-8')):
                             #archivo encontrado
+                            print("El archivo se encuentra en el directorio")
+                            
+                            #bloque de codigo para saber que hacer con el archivo
+                            
                             pass
                         else:
                             #archivo no encontrado
                             print("El archivo no se encuentra en el directorio")
+                            
+                            #preguntar si se quiere crear el archivo
+                            preguntarCrearArchivo = "Quieres crear el archivo? [y/n]"
+                            cliente.sendall(preguntarCrearArchivo.encode('utf-8'))
+                            
+                            #recibir la respuesta del cliente
+                            recibirRespuesta = cliente.recv(1024)
+                            #mandar la respuesta del cliente a la funcion de crearArchivo
+                            try:
+                                if lmcs.crearArchivo(recibirRuta.decode('utf-8'), recibirArchivo.decode('utf-8'), recibirRespuesta.decode('utf-8')):
+                                    #se creo el archivo, proceder con el demas codigo
+                                    pass
+                                else:
+                                    #no se creo el archivo (se cierra la conexion)
+                                    pass
+                            except Exception as e:
+                                print(e)
                     else:
                         #no se crea el directorio (falta saber que pasa despues, porque si llegamos aqui la conexion se cierra)
                         pass

@@ -43,3 +43,17 @@ def buscarArchivo(ruta, archivo):
     else:
         #no existe
         return False
+    
+    #funcion para crear el archivo
+    def crearArchivo(ruta, archivo,respuesta):
+        if respuesta == "y":
+            #si se quiere crear el archivo
+            archivo = open(ruta + "/" + archivo, "w")
+            archivo.close()
+            return True
+        elif respuesta == "n":
+            #si no se quiere crear el archivo
+            return False
+        else:
+            #respuesta no valida
+            raise Exception (f"{respuesta} no es una respuesta valida!")
