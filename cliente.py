@@ -16,6 +16,7 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
     respuesta_cliente = input(msg_servidor.decode('utf-8'))
     #enviar el mensaje al servidor
     cliente.sendall(respuesta_cliente.encode('utf-8'))
+    #FUNCIONA
     
     ####Enviar una respuesta al servidor
     #El servidor esta preguntando si se quiere crear el direcotorio o no

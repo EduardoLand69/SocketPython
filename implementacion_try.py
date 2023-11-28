@@ -1,14 +1,14 @@
 import os
 
-#verificar si el mensaje es una ruta
-def esDirectorio(ruta):
-    if os.path.isdir(ruta):
-        #es una ruta lo que se recibio
-        pass
+#verificar que el string no este vacio
+def esVacio(ruta):
+    if ruta!= "":
+        #no esta vacio
+        return True
     else:
-        #no es una ruta
-        raise Exception (f"{ruta} no es un directorio!")
-    
+        #esta vacio
+        raise Exception ("La cadena que se envio esta vacia")
+        return False
 #comprobar que el directorio exista en la maquina
 def buscarDirectorio(ruta):
     if os.path.exists(ruta):
@@ -16,7 +16,7 @@ def buscarDirectorio(ruta):
         return True
     else:
         #no existe
-        return True
+        return False
     
 #preguntar si se quiere crear un directorio
 def crearDirectorio(ruta, respuesta):
@@ -45,15 +45,15 @@ def buscarArchivo(ruta, archivo):
         return False
     
     #funcion para crear el archivo
-    def crearArchivo(ruta, archivo,respuesta):
-        if respuesta == "y":
-            #si se quiere crear el archivo
-            archivo = open(ruta + "/" + archivo, "w")
-            archivo.close()
-            return True
-        elif respuesta == "n":
-            #si no se quiere crear el archivo
-            return False
-        else:
-            #respuesta no valida
-            raise Exception (f"{respuesta} no es una respuesta valida!")
+def crearArchivo(ruta,archivo,respuesta):
+    if respuesta == "y":
+        #si se quiere crear el archivo
+        archivo = open(ruta + "/" + archivo, "w")
+        archivo.close()
+        return True
+    elif respuesta == "n":
+        #si no se quiere crear el archivo
+        return False
+    else:
+        #respuesta no valida
+        raise Exception (f"{respuesta} no es una respuesta valida!")
