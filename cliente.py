@@ -9,12 +9,28 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
     
     print("Conexión exitosa")
     
-    msj = "Hola, ¿En qué puedo ayudarle?"
-    cliente.sendall(msj.encode('utf-8'))
+    ####Enviar una respuesta al servidor
+    #El servidor esta pidiendo una ruta
+    msg_servidor = cliente.recv(1024)
+    #capturar una respuesta
+    respuesta_cliente = input(msg_servidor.decode('utf-8'))
+    #enviar el mensaje al servidor
+    cliente.sendall(respuesta_cliente.encode('utf-8'))
     
+    ####Enviar una respuesta al servidor de si o no
+    #El servidor esta pidiendo una ruta
+    msg_servidor = cliente.recv(1024)
+    #capturar una respuesta
+    respuesta_cliente = input(msg_servidor.decode('utf-8'))
+    #enviar el mensaje al servidor
+    cliente.sendall(respuesta_cliente.encode('utf-8'))
     
-    #Aquí le pones lo que lleve del socket
-    data = cliente.recv(1024)
-    print(f"Dice {data.decode('uft-8')}")
+    ####Enviar una respuesta al servidor para buscar el archivo
+    #El servidor esta pidiendo una ruta
+    msg_servidor = cliente.recv(1024)
+    #capturar una respuesta
+    respuesta_cliente = input(msg_servidor.decode('utf-8'))
+    #enviar el mensaje al servidor
+    cliente.sendall(respuesta_cliente.encode('utf-8'))
     
     print("Cerrando cliente")
