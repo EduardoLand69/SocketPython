@@ -57,3 +57,13 @@ def crearArchivo(ruta,archivo,respuesta):
     else:
         #respuesta no valida
         raise Exception (f"{respuesta} no es una respuesta valida!")
+    
+#crear una funcion que verifique si el archivo esta vacio o no
+def archivoVacio(ruta,archivo):
+    #esta funcion nos sirve para comprobar si un archivo tiene contenido escrito o no - Si el archivo tiene contenido, entonces preguntamos sobre escribir, sino, solo pedimos contenido
+    with open(f"{ruta}/{archivo}", 'r') as file:
+        contenido = file.read()
+        if contenido:
+            return True
+        else:
+            return False

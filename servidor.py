@@ -40,13 +40,28 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
                     print(f"El archivo se encuentra en el directorio {recibirRuta.decode('utf-8')}")
                     
                     #bloque de codigo para saber que hacer con el archivo
-                    
+                    #saber si el archivo esta vaacio
+                    if lmcs.archivoVacio:
+                        print("El archivo esta vacio")
+                    else:
+                        print("El archivo no esta vacio")
                     pass
                 else:
                     #archivo no encontrado
                     print(f"El archivo no se encuentra en el directorio {recibirRuta.decode('utf-8')}")
+                    #preguntar si se quiere crear el archivo
+                    preguntarCrearArchivo = "Quieres crear el archivo? [y/n]: "
+                    cliente.sendall(preguntarCrearArchivo.encode('utf-8'))
                     
-                    pass
+                    #recibir la respuesta del cliente
+                    recibirRespuesta = cliente.recv(1024)
+                    #mandar la respuesta del cliente a la funcion de crearArchivo
+                    try:
+                        if lmcs.crearArchivo(recibirRuta.decode('utf-8'), recibirArchivo.decode('utf-8'), recibirRespuesta.decode('utf-8')):
+                            #se creo el archivo, proceder con el demas codigo
+                            print(f"El cliente creo un archivo: {recibirRuta.decode('utf-8')}/{recibirArchivo.decode('utf-8')}")
+                    except Exception as e:
+                        print(e)
                 pass
             else:
                 #print("Directorio no encontrado")
