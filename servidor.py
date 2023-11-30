@@ -88,8 +88,25 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
                             print(f"El archivo se encuentra en el directorio {recibirRuta.decode('utf-8')}")
                             
                             #bloque de codigo para saber que hacer con el archivo
+                            #preguntar si se quiere sobre escribir el archivo
+                            preguntarCrearArchivo = "Quieres sobreescribir el archivo? [y/n]: "
+                            cliente.sendall(preguntarCrearArchivo.encode('utf8'))
                             
-                            pass
+                            #recibir la respuesta del cliente
+                            recibirRespuesta = cliente.recv(1024)
+                            if recibirRespuesta.decode('utf8') == 'y':
+                                #pedir al  cliente el contenido
+                                pedirContenido = "Ingresa el contenido para tu archivo: "
+                                cliente.sendall(pedirContenido.encode('utf-8'))
+                                #recibir el contenido
+                                recibirContenido = cliente.recv(1024)
+                                #mandar el contenido al archivo
+                                try:
+                                    lmcs.sobreescribirArchivo(recibirRuta.decode('utf-8'), recibirArchivo.decode('utf-8'), recibirContenido.decode('utf-8'))
+                                except Exception as e:
+                                    print(e)
+                            else: #el cliente no quiere sobreescribir el archivo
+                                print("El cliente no quiere sobreescribir!")
                         else:
                             #archivo no encontrado
                             print(f"El archivo no se encuentra en el directorio {recibirRuta.decode('utf-8')}")

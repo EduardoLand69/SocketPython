@@ -67,3 +67,13 @@ def archivoVacio(ruta,archivo):
             return True
         else:
             return False
+        
+#funcion para preguntar si se quiere sobreescribir el archivo
+def sobreescribirArchivo(ruta,archivo,contenido):
+    #sobre escribir el archivo
+    if contenido != "":
+        archivo = open(f"{ruta}/{archivo}", "w")
+        archivo.write(contenido)
+        archivo.close()
+    else:
+        raise Exception("El contenido no es valido para meter al archivo")
