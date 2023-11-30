@@ -28,7 +28,7 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
         try:
             lmcs.esVacio(recibirRuta.decode('utf-8'))
             #ahora que sabemos que cumple con la estructura de un directorio
-            if lmcs.buscarDirectorio(recibirRuta.decode('utf-8')):
+            if lmcs.buscarDirectorio(recibirRuta.decode('utf-8')): ###########################
                 #acciones a realizar si el directorio existe
                 #si el directorio existe, pasar a pedir el archivo
                 cliente.sendall(pedirArchivo.encode('utf-8'))
@@ -63,7 +63,7 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
                     except Exception as e:
                         print(e)
                 pass
-            else:
+            else: ##############################################
                 #print("Directorio no encontrado")
                 #lo que pasa si el directorio no existe
                 
