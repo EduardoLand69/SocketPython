@@ -12,11 +12,20 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
     
     ####Enviar una respuesta al servidor
     #El servidor esta pidiendo una ruta
-    msg_servidor = cliente.recv(1024)
+    msg_servidor = cliente.recv(1024) #Ingresa un directorio para empezar a trabajar
     #capturar una respuesta
     respuesta_cliente = input(msg_servidor.decode('utf-8'))
     #enviar el mensaje al servidor
     cliente.sendall(respuesta_cliente.encode('utf-8'))
+    
+    
+    ####Enviar una respuesta al servidor
+    #El servidor esta pidiendo una repsuesta
+    msg_servidor = cliente.recv(1024) #Recibibr verificación del código
+    if msg_servidor.decode('utf-8') == "ok": #El directorio si existe
+        pass
+    if msg_servidor.decode('utf-8') == "no": #El directorio no existe
+        pass
     
     ####Enviar una respuesta al servidor
     #El servidor esta preguntando si se quiere crear el direcotorio o no
@@ -25,14 +34,14 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
     respuesta_cliente = input(msg_servidor.decode('utf-8'))
     #enviar el mensaje al servidor
     cliente.sendall(respuesta_cliente.encode('utf-8'))
-    if respuesta_cliente == "y": #¿Quieres crear el directorio?
+    if respuesta_cliente == "y": #¿Quieres crear el archivo? en caso de que la ruta exista
         #El servidor esta pidiendo una ruta
         msg_servidor = cliente.recv(1024)
         #capturar una respuesta
         respuesta_cliente = input(msg_servidor.decode('utf-8'))
         #enviar el mensaje al servidor
         cliente.sendall(respuesta_cliente.encode('utf-8'))
-        if respuesta_cliente == "y":#¿Quieres crear el archivo?
+        if respuesta_cliente == "y":#¿Quieres crear el directorio? en caso de que NO exista la ruta
             msg_servidor = cliente.recv(1024)
             respuesta_cliente = input(msg_servidor.decode('utf-8'))
             cliente.sendall(respuesta_cliente.encode('utf-8'))
@@ -40,6 +49,8 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
             print("El cliente se cerrará")
             tm.sleep(3)
             exit
+            if respuesta_cliente == "y": #¿Quieres crear el archivo? en caso de que se cree el directorio nuevo
+                
     elif respuesta_cliente == "n":
         print("El cliente se cerrará")
         tm.sleep(3)
