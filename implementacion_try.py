@@ -48,7 +48,7 @@ def buscarArchivo(ruta, archivo):
 def crearArchivo(ruta,archivo,respuesta):
     if respuesta == "y":
         #si se quiere crear el archivo
-        archivo = open(ruta + "/" + archivo, "w")
+        archivo = open(f"{ruta}{archivo}", "w")
         archivo.close()
         return True
     elif respuesta == "n":
@@ -72,4 +72,4 @@ def archivoVacio(ruta,archivo):
 def escribir(ruta,archivo,contenido):
     with open(f"{ruta}{archivo}", "w") as arch:
         arch.write(contenido)
-    print(f"Archivo, {archivo}, escrito correctamente")
+    #print(f"Archivo, {archivo}, escrito correctamente")

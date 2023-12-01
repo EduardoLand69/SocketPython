@@ -47,8 +47,17 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
         
         #el archivo no existe el servidor
         if msg_servidor.decode('utf-8') == "no":
-            #el servidor pregunta si se quiere crear el archivo
-            pass
+            ##recibir respuesta del servidor
+            pregunta= cliente.recv(1024) #"Quieres crear el archivo?
+            respuesta_cliente = input(pregunta.decode('utf-8'))
+            if respuesta_cliente == "y" or respuesta_cliente == "Y":
+                cliente.sendall(respuesta_cliente.encode('utf-8'))
+                #le decimos al servidor que si queremos crear el archivo
+                #bloque para controlar si se quiere crear el archivo
+            if respuesta_cliente == "n" or respuesta_cliente == "N":
+                print("No se creo el archivo :(")
+                tm.sleep(3)
+                exit
 
     if msg_servidor.decode('utf-8') == "no": #el servidor no tiene el directorio
         

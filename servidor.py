@@ -3,10 +3,10 @@ import os #esta lib la usaremos para trabajar con los archivos
 import implementacion_try as lmcs
 
 # Configuración del servidor
-HOST = '127.0.0.1'
+HOST = '25.67.65.188'
 PORT = 3103
 
-pedirRuta = "Ingresa un directorio para empezar a trabar: "
+pedirRuta = "Ingresa un directorio para empezar a trabajar: "
 pedirArchivo = "Ingresa el nombre del archivo con el que quieres trabajar: "
 
 with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
