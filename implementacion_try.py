@@ -29,7 +29,7 @@ def crearDirectorio(ruta, respuesta):
         return False
     else:
         #respuesta no valida
-        raise Exception (f"{respuesta} no es una respuesta valida!")
+        raise Exception ("No fue posible crear un directorio")
 
 #funcion para verificar que el mensaje es un archivo
 def esArchivo(ruta, archivo):
@@ -48,7 +48,7 @@ def buscarArchivo(ruta, archivo):
 def crearArchivo(ruta,archivo,respuesta):
     if respuesta == "y":
         #si se quiere crear el archivo
-        archivo = open(ruta + "/" + archivo, "w")
+        archivo = open(f"{ruta}{archivo}", "w")
         archivo.close()
         return True
     elif respuesta == "n":
@@ -61,19 +61,15 @@ def crearArchivo(ruta,archivo,respuesta):
 #crear una funcion que verifique si el archivo esta vacio o no
 def archivoVacio(ruta,archivo):
     #esta funcion nos sirve para comprobar si un archivo tiene contenido escrito o no - Si el archivo tiene contenido, entonces preguntamos sobre escribir, sino, solo pedimos contenido
-    with open(f"{ruta}/{archivo}", 'r') as file:
+    with open(f"{ruta}{archivo}", 'r') as file:
         contenido = file.read()
         if contenido:
-            return True
-        else:
             return False
+        else:
+            return True
         
-#funcion para preguntar si se quiere sobreescribir el archivo
-def sobreescribirArchivo(ruta,archivo,contenido):
-    #sobre escribir el archivo
-    if contenido != "":
-        archivo = open(f"{ruta}/{archivo}", "w")
-        archivo.write(contenido)
-        archivo.close()
-    else:
-        raise Exception("El contenido no es valido para meter al archivo")
+#funcion para escribir en el archivo
+def escribir(ruta,archivo,contenido):
+    with open(f"{ruta}{archivo}", "w") as arch:
+        arch.write(contenido)
+    #print(f"Archivo, {archivo}, escrito correctamente")
