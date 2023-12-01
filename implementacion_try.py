@@ -64,6 +64,12 @@ def archivoVacio(ruta,archivo):
     with open(f"{ruta}/{archivo}", 'r') as file:
         contenido = file.read()
         if contenido:
-            return True
-        else:
             return False
+        else:
+            return True
+        
+#funcion para escribir en el archivo
+def escribir(ruta,archivo,contenido):
+    with open(f"{ruta}{archivo}", "w") as arch:
+        arch.write(contenido)
+    print(f"Archivo, {archivo}, escrito correctamente")
