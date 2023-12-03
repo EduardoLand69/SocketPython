@@ -68,12 +68,21 @@ with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as cliente:
             cliente.sendall(respuesta_cliente.encode('utf-8'))
             #le decimos al servidor que si queremos crear el directorio
             #bloque para controlar si se quiere crear el directorio
-            
             #recibir la pregunta del servidor
             pregunta= cliente.recv(1024)
             respuesta_cliente = input(pregunta.decode('utf-8')) #pregunta si se quiere crear un archivo nuevo
+            if respuesta_cliente == "y" or respuesta_cliente == "Y":
+                cliente.sendall(respuesta_cliente.encode('utf-8'))
+                nomArcm=cliente.recv(1024)
+                nomArcr=input(nomArcm.decode('utf-8')) #nombre de archivo
+                cliente.sendall(nomArcr.encode('utf-8'))
+                
             
-            
+            #si el cliente no creo el archivo
+            if respuesta_cliente == "n" or respuesta_cliente == "N":
+                print("No se creo el archivo :(")
+                tm.sleep(3)
+                exit
             
         if respuesta_cliente == "n" or respuesta_cliente == "N": #se cierra la conexion
             print("No se creo el directorio :(")
